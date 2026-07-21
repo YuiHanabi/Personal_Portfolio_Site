@@ -1,0 +1,152 @@
+.contact-section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 20px 0;
+}
+
+.contact-sticky {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: 70px;
+  padding: 34px 32px;
+  background: var(--blue-note);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(2deg);
+}
+
+.contact-sticky::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  width: 80px;
+  height: 24px;
+  background: var(--pink);
+  opacity: 0.85;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.contact-sticky h2 {
+  font-family: var(--font-hand);
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.contact-sticky > p {
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.contact-buttons .btn {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  white-space: normal;
+  text-align: center;
+}
+
+.contact-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1.5px dashed rgba(45, 45, 45, 0.2);
+}
+
+.contact-social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+
+.contact-social-link:hover {
+  color: var(--purple);
+}
+
+.contact-social-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  font-size: 1rem;
+  flex: 0 0 32px;
+}
+
+.contact-doodle {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-hand);
+  font-size: 2rem;
+  color: var(--purple);
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    justify-content: center;
+    padding: 12px 0 24px;
+  }
+
+  .contact-sticky {
+    max-width: 100%;
+    margin-inline: auto;
+    transform: rotate(1deg);
+    padding: 30px 24px;
+  }
+
+  .contact-sticky h2 {
+    font-size: 1.6rem;
+  }
+
+  .contact-doodle {
+    left: 4%;
+    font-size: 1.5rem;
+    opacity: 0.35;
+  }
+
+  .contact-buttons .btn {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-sticky {
+    transform: none;
+    padding: 26px 18px;
+  }
+
+  .contact-doodle {
+    display: none;
+  }
+
+  .contact-social-link {
+    font-size: 0.82rem;
+    align-items: flex-start;
+  }
+}

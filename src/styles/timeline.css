@@ -1,0 +1,238 @@
+.learning-timeline-section {
+  position: relative;
+}
+
+.learning-timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 32px;
+  margin-bottom: 42px;
+}
+
+.learning-timeline-header .section-heading {
+  margin-bottom: 0;
+}
+
+.learning-timeline-subtitle {
+  max-width: 430px;
+  font-size: 0.92rem;
+  text-align: right;
+}
+
+.learning-timeline-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.learning-timeline-board::before {
+  content: '';
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 46px;
+  height: 4px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--border) 0,
+    var(--border) 12px,
+    transparent 12px,
+    transparent 22px
+  );
+  opacity: 0.18;
+  z-index: -1;
+}
+
+.learning-timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.learning-timeline-marker {
+  width: 92px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  background: var(--yellow);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  transform: rotate(-2deg);
+}
+
+.learning-timeline-marker span {
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.learning-timeline-card {
+  position: relative;
+  min-height: 240px;
+  padding: 24px;
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.learning-timeline-card::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 58px;
+  height: 22px;
+  background: rgba(255, 214, 232, 0.9);
+  border: 1px solid rgba(45, 45, 45, 0.08);
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.learning-timeline-item:nth-child(2n) .learning-timeline-marker {
+  background: var(--blue);
+  transform: rotate(2deg);
+}
+
+.learning-timeline-item:nth-child(3n) .learning-timeline-marker {
+  background: var(--green);
+}
+
+.learning-timeline-item:nth-child(4n) .learning-timeline-card::before {
+  background: rgba(184, 217, 245, 0.9);
+}
+
+.learning-timeline-card:hover {
+  transform: translateY(-6px) rotate(-0.5deg);
+  box-shadow: var(--shadow-lg);
+}
+
+.learning-timeline-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.learning-timeline-year {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 14px;
+  background: var(--purple-light);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--purple-dark);
+}
+
+.learning-timeline-index {
+  font-family: var(--font-note);
+  font-size: 1.1rem;
+  color: rgba(26, 26, 26, 0.42);
+}
+
+.learning-timeline-card h3 {
+  margin-bottom: 10px;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  color: var(--text);
+}
+
+.learning-timeline-card p {
+  font-size: 0.88rem;
+}
+
+.learning-timeline-note {
+  position: absolute;
+  right: 28px;
+  bottom: -34px;
+  padding: 10px 18px;
+  background: var(--pink);
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  font-family: var(--font-note);
+  font-size: 1.15rem;
+  color: var(--text);
+  transform: rotate(3deg);
+}
+
+@media (max-width: 980px) {
+  .learning-timeline-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .learning-timeline-board::before {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .learning-timeline-header {
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  .learning-timeline-header .section-heading {
+    margin-bottom: 12px;
+  }
+
+  .learning-timeline-subtitle {
+    max-width: none;
+    text-align: left;
+  }
+
+  .learning-timeline-board {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .learning-timeline-item {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    align-items: start;
+    gap: 14px;
+  }
+
+  .learning-timeline-marker {
+    width: 72px;
+    min-height: 50px;
+    margin-top: 14px;
+  }
+
+  .learning-timeline-marker span {
+    font-size: 1.15rem;
+  }
+
+  .learning-timeline-card {
+    min-height: 0;
+    padding: 22px 20px;
+  }
+
+  .learning-timeline-note {
+    right: 8px;
+    bottom: -44px;
+  }
+}
+
+@media (max-width: 440px) {
+  .learning-timeline-item {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-timeline-marker {
+    align-self: flex-start;
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,38 @@
+.bg-shapes{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.35;
+}
+
+.blob-1{
+    width:450px;
+    height:450px;
+    background:#ffd6d6;
+    top:-120px;
+    left:-120px;
+}
+
+.blob-2{
+    width:500px;
+    height:500px;
+    background:#d7f6ff;
+    bottom:-180px;
+    left:-120px;
+}
+
+.blob-3{
+    width:420px;
+    height:420px;
+    background:#e6d8ff;
+    bottom:-120px;
+    right:-120px;
+}

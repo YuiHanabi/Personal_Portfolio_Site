@@ -1,0 +1,37 @@
+.mouse-glow {
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(124, 107, 240, 0.1) 0%,
+    rgba(255, 232, 122, 0.05) 35%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 768px) {
+  .mouse-glow {
+    display: none;
+  }
+}
+
+/* Keep aurora animation on all screen sizes */
+@media (max-width: 768px) {
+  .aurora::before,
+  .aurora::after {
+    animation-duration: 28s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mouse-glow {
+    display: none;
+  }
+}

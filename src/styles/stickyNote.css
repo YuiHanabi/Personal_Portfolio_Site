@@ -1,0 +1,24 @@
+.sticky-note,
+.contact-sticky {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sticky-note:hover,
+.contact-sticky:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
+}
+
+.sticky-note {
+  border: 1.5px solid rgba(45, 45, 45, 0.15);
+}
+
+.contact-sticky {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-note:hover,
+  .contact-sticky:hover {
+    transform: inherit;
+  }
+}

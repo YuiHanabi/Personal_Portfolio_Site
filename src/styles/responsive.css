@@ -1,0 +1,105 @@
+/* Tablet & mobile polish — loaded last for overrides */
+
+.topbar {
+  position: sticky;
+}
+
+@media (max-width: 860px) {
+  .topbar {
+    position: sticky;
+  }
+}
+
+/* Background effects: keep aurora + blobs visible, tuned for smaller screens */
+@media (max-width: 768px) {
+  .aurora::before,
+  .aurora::after {
+    filter: blur(80px);
+    opacity: 0.28;
+  }
+
+  .blob {
+    filter: blur(70px);
+    opacity: 0.28;
+  }
+
+  .blob-1 {
+    width: 280px;
+    height: 280px;
+  }
+
+  .blob-2 {
+    width: 320px;
+    height: 320px;
+  }
+
+  .blob-3 {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+/* Timeline note spacing on small screens */
+@media (max-width: 768px) {
+  .learning-timeline-section {
+    padding-bottom: 48px;
+  }
+
+  .learning-timeline-note {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    display: inline-block;
+    margin-top: 18px;
+    transform: rotate(2deg);
+  }
+}
+
+/* Footer */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    padding: 24px 0;
+  }
+
+  .footer-right {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+  }
+}
+
+/* Prevent horizontal scroll from rotated / absolute elements */
+.hero {
+  overflow-x: clip;
+}
+
+.contact-section,
+.projects-section,
+.learning-timeline-section,
+.journey-certs-section {
+  overflow-x: clip;
+}
+
+/* Tap feedback on cards (mirrors hover on touch) */
+@media (hover: none) {
+  .stat-card:active,
+  .project-card:active,
+  .cert-card:active,
+  .skill-tile:active,
+  .learning-timeline-card:active {
+    transform: translateY(-3px);
+  }
+
+  .btn:hover,
+  .btn-small:hover {
+    transform: none;
+  }
+
+  .btn:active,
+  .btn-small:active {
+    transform: scale(0.98);
+  }
+}

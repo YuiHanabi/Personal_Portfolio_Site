@@ -1,0 +1,38 @@
+.dust-container{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:-3;
+}
+
+.dust{
+    position:absolute;
+
+    bottom:-20px;
+
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.18;
+
+    filter:blur(1px);
+
+    animation:floatDust linear infinite;
+}
+
+@keyframes floatDust{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-120vh);
+    }
+
+}

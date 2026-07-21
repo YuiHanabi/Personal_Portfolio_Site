@@ -1,0 +1,106 @@
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes gentleSway {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(-3deg) translateY(-6px); }
+}
+
+@keyframes noteSway {
+  0%, 100% { transform: rotate(8deg) translateY(0); }
+  50% { transform: rotate(7deg) translateY(-5px); }
+}
+
+.doodle-star {
+  animation: float 4s ease-in-out infinite;
+}
+
+.doodle-star:nth-child(2) {
+  animation-delay: 1.5s;
+}
+
+.wiggle-hover:hover,
+.wiggle-hover:active {
+  animation: wiggle 0.4s ease;
+}
+
+.page-doodles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pd {
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0.35;
+  animation: float 5s ease-in-out infinite;
+}
+
+.pd-1 { top: 18%; left: 3%; color: var(--purple); animation-delay: 0s; }
+.pd-2 { top: 35%; right: 4%; color: var(--yellow); font-size: 1rem; animation-delay: 1s; }
+.pd-3 { top: 55%; left: 2%; color: #e88; animation-delay: 2s; }
+.pd-4 { top: 72%; right: 6%; font-size: 1.4rem; animation-delay: 0.5s; }
+.pd-5 { top: 48%; right: 2%; color: var(--purple); animation-delay: 1.5s; }
+.pd-6 { top: 85%; left: 8%; color: var(--yellow); animation-delay: 2.5s; }
+.pd-7 { top: 25%; left: 92%; color: #e88; font-size: 0.9rem; animation-delay: 3s; }
+.pd-8 { top: 62%; left: 95%; color: var(--purple); font-size: 0.85rem; animation-delay: 1.8s; }
+
+/* Touch devices: keep float animations on hero elements */
+@media (pointer: coarse) {
+  .polaroid {
+    animation: gentleSway 5s ease-in-out infinite;
+  }
+
+  .sticky-note {
+    animation: noteSway 4.5s ease-in-out infinite 0.5s;
+  }
+
+  .hero-doodle-star1,
+  .hero-doodle-star2 {
+    animation: float 4s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 768px) {
+  .pd {
+    font-size: 1rem;
+    opacity: 0.28;
+  }
+
+  .pd-4 { font-size: 1.1rem; }
+  .pd-7, .pd-8 { font-size: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .page-doodles .pd-7,
+  .page-doodles .pd-8 {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doodle-star,
+  .pd,
+  .polaroid,
+  .sticky-note,
+  .hero-doodle-star1,
+  .hero-doodle-star2 {
+    animation: none !important;
+  }
+
+  .wiggle-hover:hover,
+  .wiggle-hover:active {
+    animation: none;
+  }
+}

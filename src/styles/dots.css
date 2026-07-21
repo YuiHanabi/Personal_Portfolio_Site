@@ -1,0 +1,42 @@
+.dots{
+    position:absolute;
+    right:420px;
+    top:200px;
+
+    width:180px;
+    height:180px;
+
+    background-image:radial-gradient(#b99cff 2px,transparent 2px);
+    background-size:12px 12px;
+
+    opacity:.35;
+}
+.star{
+    position:absolute;
+    color:#8b6cff;
+    animation:float 6s ease-in-out infinite;
+}
+
+.s1{
+    top:140px;
+    left:55%;
+}
+
+.s2{
+    right:180px;
+    top:260px;
+}
+
+.s3{
+    left:70px;
+    bottom:250px;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
