@@ -7,7 +7,7 @@ require_once __DIR__ . '/../fpdf/fpdf.php';
 
 $name = 'John Kenneth Araojo';
 $title = 'Developer & IT Support Specialist';
-$tagline = 'Computer Science Graduate · Web Developer · QA Enthusiast';
+$tagline = 'Computer Science Graduate | Web Developer | QA Enthusiast';
 
 $email = 'johnkennetho.araojo@gmail.com';
 $phone = '09455130807';
@@ -18,7 +18,7 @@ $education = [
     [
         'school' => 'Adamson University',
         'degree' => 'Bachelor of Science in Computer Science',
-        'dates' => '2021 – 2026',
+        'dates' => '2021 - 2026',
     ],
 ];
 
@@ -37,7 +37,7 @@ $experience = [
     [
         'role' => 'Web Development Projects',
         'company' => 'Academic & Personal',
-        'dates' => '2022 – Present',
+        'dates' => '2022 - 2026',
         'bullets' => [
             'Designed and built full-stack web systems including inventory, event, and help desk platforms.',
             'Implemented responsive UI, RESTful integrations, and database-driven features with Laravel and React.',
@@ -54,7 +54,7 @@ $projects = [
     ],
     [
         'title' => 'Help Desk Management System',
-        'tags' => ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
+        'tags' => ['PHP', 'Laravel', 'Blade', 'MySQL'],
         'desc' => 'Developed a ticket-based IT support platform with role-based access, status tracking, and admin dashboards for issue resolution.',
     ],
     [
@@ -64,7 +64,7 @@ $projects = [
     ],
     [
         'title' => 'Stock Management System',
-        'tags' => ['PHP', 'MySQL', 'JavaScript'],
+        'tags' => ['PHP', 'Laravel', 'Blade', 'MySQL'],
         'desc' => 'Engineered an inventory solution for stock monitoring, product movement logs, and automated low-stock alerts with reporting.',
     ],
     [
@@ -162,7 +162,7 @@ function drawPageFooter($pdf, $name, $pageNum, $C, $sidebarW)
     setText($pdf, $C['muted']);
     $pdf->SetFont('Helvetica', '', 7.5);
     $pdf->SetXY($sidebarW + 12, $y + 2);
-    $pdf->Cell($footerW, 4, $name . '  ·  Resume', 0, 0, 'L');
+    $pdf->Cell($footerW, 4, $name . '  |  Resume', 0, 0, 'L');
     $pdf->Cell(0, 4, 'Page ' . $pageNum, 0, 0, 'R');
 }
 
@@ -304,7 +304,7 @@ function drawSkillGroup($pdf, $x, $y, $label, $items, $width, $C)
     $pdf->SetX($x);
     setText($pdf, $C['body']);
     $pdf->SetFont('Helvetica', '', 8.5);
-    $pdf->MultiCell($width, 4.2, implode('   ·   ', $items), 0, 'L');
+    $pdf->MultiCell($width, 4.2, implode('   |   ', $items), 0, 'L');
 
     return $pdf->GetY() + 3;
 }
@@ -328,6 +328,32 @@ function drawCertRow($pdf, $x, $y, $cert, $width, $C)
     return $pdf->GetY() + 2.5;
 }
 
+function prepareCircularPhoto($sourcePath, $outputPath, $innerSize = 400)
+{
+    if (!file_exists($sourcePath)) {
+        return false;
+    }
+
+    $script = __DIR__ . '/../scripts/prepare_circular_photo.py';
+    if (!file_exists($script)) {
+        return false;
+    }
+
+    $python = stripos(PHP_OS, 'WIN') === 0 ? 'python' : 'python3';
+    $command = sprintf(
+        '%s %s %s %s %d',
+        $python,
+        escapeshellarg($script),
+        escapeshellarg($sourcePath),
+        escapeshellarg($outputPath),
+        $innerSize
+    );
+
+    exec($command, $output, $code);
+
+    return $code === 0 && file_exists($outputPath);
+}
+
 // ============================================
 // BUILD PDF
 // ============================================
@@ -342,15 +368,16 @@ drawSidebarBackground($pdf, $sidebarW, $pageH, $C);
 // --- Sidebar: photo & identity ---
 $photoY = 14;
 if (file_exists($photoPath)) {
-    $photoSize = 36;
+    $photoSize = 40;
     $photoX = ($sidebarW - $photoSize) / 2 + 1.5;
+    $circularPhotoPath = __DIR__ . '/../src/assets/hero-image-circle.png';
 
-    setFill($pdf, $C['white']);
-    $pdf->Rect($photoX - 2, $photoY - 2, $photoSize + 4, $photoSize + 4, 'F');
-    setDraw($pdf, $C['accent'], 0.5);
-    $pdf->Rect($photoX - 2, $photoY - 2, $photoSize + 4, $photoSize + 4);
+    if (prepareCircularPhoto($photoPath, $circularPhotoPath)) {
+        $pdf->Image($circularPhotoPath, $photoX, $photoY, $photoSize, $photoSize);
+    } else {
+        $pdf->Image($photoPath, $photoX, $photoY, $photoSize, $photoSize);
+    }
 
-    $pdf->Image($photoPath, $photoX, $photoY, $photoSize, $photoSize);
     $photoY += $photoSize + 8;
 } else {
     $photoY = 20;
@@ -387,11 +414,11 @@ $sy += 2;
 $sy = drawSidebarTitle($pdf, $sidebarPad, $sy, 'Core Skills', $sw, $C);
 $coreSkills = array_slice($skillGroups['Frontend'], 0, 4);
 $coreSkills = array_merge($coreSkills, array_slice($skillGroups['Backend & Data'], 0, 3));
-$sy = drawSidebarText($pdf, $sidebarPad, $sy, implode("\n", array_map(fn($s) => '· ' . $s, $coreSkills)), $sw, $C, 7.8);
+$sy = drawSidebarText($pdf, $sidebarPad, $sy, implode("\n", array_map(fn($s) => '- ' . $s, $coreSkills)), $sw, $C, 7.8);
 $sy += 2;
 
 $sy = drawSidebarTitle($pdf, $sidebarPad, $sy, 'Strengths', $sw, $C);
-drawSidebarText($pdf, $sidebarPad, $sy, implode("\n", array_map(fn($q) => '· ' . $q, array_slice($qualities, 0, 6))), $sw, $C, 7.8);
+drawSidebarText($pdf, $sidebarPad, $sy, implode("\n", array_map(fn($q) => '- ' . $q, array_slice($qualities, 0, 6))), $sw, $C, 7.8);
 
 // --- Main column header ---
 $my = 16;
@@ -452,7 +479,7 @@ $pdf->Cell(120, 7, $name, 0, 1);
 $pdf->SetX(14);
 setText($pdf, [203, 213, 225]);
 $pdf->SetFont('Helvetica', '', 9);
-$pdf->Cell(120, 5, 'Portfolio Highlights · Projects · Certifications · Technical Skills', 0, 0);
+$pdf->Cell(120, 5, 'Portfolio Highlights | Projects | Certifications | Technical Skills', 0, 0);
 
 $pdf->SetXY(130, 9);
 setText($pdf, $C['white']);
@@ -466,7 +493,7 @@ $p2w = 182;
 $p2y = 36;
 
 $p2y = drawMainSection($pdf, $p2x, $p2y, 'Project Portfolio', $p2w, $C);
-foreach ($projects as $project) {
+foreach (array_slice($projects, 3) as $project) {
     if ($p2y > 248) {
         break;
     }
@@ -509,14 +536,14 @@ $pdf->Cell(28, 4, 'STRENGTHS', 0, 0);
 $pdf->SetXY($p2x + 34, $barY + 3);
 setText($pdf, $C['body']);
 $pdf->SetFont('Helvetica', '', 8);
-$pdf->MultiCell($p2w - 38, 4, implode('  ·  ', $qualities), 0, 'L');
+$pdf->MultiCell($p2w - 38, 4, implode('  |  ', $qualities), 0, 'L');
 
 setDraw($pdf, $C['line'], 0.15);
 $pdf->Line(14, 285, 196, 285);
 setText($pdf, $C['muted']);
 $pdf->SetFont('Helvetica', '', 7.5);
 $pdf->SetXY(14, 286);
-$pdf->Cell(90, 4, $name . '  ·  Resume', 0, 0, 'L');
+$pdf->Cell(90, 4, $name . '  |  Resume', 0, 0, 'L');
 $pdf->Cell(182, 4, 'Page 2', 0, 0, 'R');
 
 // ============================================
